@@ -19,7 +19,12 @@ public class UserServiceImpl implements UserService {
     }
     public void create(UserCreateRequest userCreateRequest) {
       //  userValidator.validateForCreation(examCreateRequest);
-        User userToCreate = userMapper.toModel(userCreateRequest);
+
+        User userToCreate = new User();
+        userToCreate.setName(userCreateRequest.getName());
+        userToCreate.setCpf(userCreateRequest.getCpf());
+        userToCreate.setBirthDate(userCreateRequest.getBirthDate());
+        userToCreate.setEmail(userCreateRequest.getEmail());
         userRepository.save(userToCreate);
     }
 
