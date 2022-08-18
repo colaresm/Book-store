@@ -2,6 +2,7 @@ package com.booksstore.booksstore.service.impl;
 
 import com.booksstore.booksstore.model.Address;
 import com.booksstore.booksstore.service.UserService;
+import com.booksstore.booksstore.validation.UserValidation;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.booksstore.booksstore.model.User;
@@ -13,13 +14,17 @@ import com.booksstore.booksstore.mapper.UserMapper;
 public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
+
+    private final UserValidation userValidation;
     @Autowired
-    public UserServiceImpl(UserMapper userMapper, UserRepository userRepository) {
+    public UserServiceImpl(UserMapper userMapper, UserRepository userRepository, UserValidation userValidation) {
         this.userMapper = userMapper;
         this.userRepository = userRepository;
+        this.userValidation= userValidation;
     }
     public void create(UserCreateRequest userCreateRequest) {
-      //  userValidator.validateForCreation(examCreateRequest);
+
+        userValidation.validateForCreation(userCreateRequest);
 
         User userToCreate = new User();
         Address addressToCreate = new Address();
