@@ -3,12 +3,14 @@ package com.booksstore.booksstore.dto.user;
 import com.booksstore.booksstore.dto.address.AddressRequest;
 
 
+import com.booksstore.booksstore.dto.client.ClientCreateRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.hibernate.validator.constraints.br.CPF;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -21,7 +23,7 @@ public class UserCreateRequest {
     @CPF
     private String cpf;
 
-    @Email
+ //   @Email
     @Size(max = 60, message = "O tamanho do campo e-mail deve ser entre {min} e {max}")
     private String email;
 
@@ -34,4 +36,7 @@ public class UserCreateRequest {
     private LocalDate birthDate;
 
     private AddressRequest addressRequest;
+
+    @Valid
+    private ClientCreateRequest clientCreateRequest;
 }

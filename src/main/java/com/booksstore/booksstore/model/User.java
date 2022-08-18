@@ -23,6 +23,10 @@ public class User extends BaseEntity{
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "address_id", nullable = true)
-    private Address  Address;
+    private Address  address;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "client_id", nullable = true)
+    private Client  client;
 
 }
