@@ -53,7 +53,6 @@ public class UserServiceImpl implements UserService {
         Client clientToCreate = new Client();
         clientToCreate.setUsername(userToCreate.getClient().getUsername());
         clientToCreate.setPassword(userToCreate.getClient().getPassword());
-
         userToCreate.setAddress(addressToCreate);
         userToCreate.setClient(clientToCreate);
         System.out.println(userToCreate);
