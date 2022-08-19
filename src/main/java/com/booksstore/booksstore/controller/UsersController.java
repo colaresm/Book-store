@@ -19,7 +19,7 @@ public class UsersController implements UserControllerDocs{
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody @Valid UserCreateRequest userCreateRequest) {
-        System.out.println(userCreateRequest);
+
         userService.create(userCreateRequest);
     }
 }

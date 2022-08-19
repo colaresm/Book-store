@@ -23,7 +23,7 @@ public class UserCreateRequest {
     @CPF
     private String cpf;
 
- //   @Email
+    @Email
     @Size(max = 60, message = "O tamanho do campo e-mail deve ser entre {min} e {max}")
     private String email;
 

@@ -1,6 +1,8 @@
 package com.booksstore.booksstore.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.booksstore.booksstore.model.Address;
 import com.booksstore.booksstore.model.Client;
@@ -14,7 +16,11 @@ import com.booksstore.booksstore.repository.UserRepository;
 import com.booksstore.booksstore.mapper.UserMapper;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.SecureRandom;
+
+@Slf4j
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
@@ -28,15 +34,17 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
         this.userValidation= userValidation;
 
-    }
-    @Override
 
+    }
+
+    @Override
     public void create(UserCreateRequest userCreateRequest) {
 
         userValidation.validateForCreation(userCreateRequest);
 
         User userToCreate = new User();
         Address addressToCreate = new Address();
+        Client clientToCreate = new Client();
 
         userToCreate.setName(userCreateRequest.getName());
         userToCreate.setCpf(userCreateRequest.getCpf());
@@ -50,12 +58,15 @@ public class UserServiceImpl implements UserService {
         addressToCreate.setNeighborhood(userCreateRequest.getAddressRequest().getNeighborhood());
         addressToCreate.setComplement(userCreateRequest.getAddressRequest().getComplement());
 
-        Client clientToCreate = new Client();
-        clientToCreate.setUsername(userToCreate.getClient().getUsername());
-        clientToCreate.setPassword(userToCreate.getClient().getPassword());
+
+        clientToCreate.setUsername(userCreateRequest.getClientCreateRequest().getUsername());
+
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
+        clientToCreate.setPassword(bCryptPasswordEncoder.encode(userCreateRequest.getClientCreateRequest().getPassword()));
+
         userToCreate.setAddress(addressToCreate);
         userToCreate.setClient(clientToCreate);
-        System.out.println(userToCreate);
+
         userRepository.save(userToCreate);
     }
 
