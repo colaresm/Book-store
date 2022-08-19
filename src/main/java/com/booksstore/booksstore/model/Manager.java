@@ -1,0 +1,32 @@
+package com.booksstore.booksstore.model;
+
+import lombok.Data;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+@Data
+@Entity
+@Table(name = "managers")
+public class Manager extends BaseEntity{
+    @Column()
+    private String cpf;
+
+    @Column()
+    private String email;
+
+    @Column()
+    private String name;
+
+    @Column()
+    private LocalDate birthDate;
+
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "address_id", nullable = true)
+    private Address  address;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "client_id", nullable = true)
+    private Client  client;
+
+}
