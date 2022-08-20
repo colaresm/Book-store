@@ -6,12 +6,14 @@ import com.booksstore.booksstore.model.Address;
 import com.booksstore.booksstore.model.Client;
 import com.booksstore.booksstore.model.Manager;
 import com.booksstore.booksstore.repository.ManagerRepository;
+import com.booksstore.booksstore.service.ManagerService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.security.SecureRandom;
 
-public class ManagerServiceImpl {
+public class ManagerServiceImpl implements ManagerService{
     private final ManagerMapper managerMapper;
     private final ManagerRepository managerRepository;
 
@@ -49,11 +51,11 @@ public class ManagerServiceImpl {
         clientToCreate.setUsername(managerCreateRequest.getClientCreateRequest().getUsername());
 
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
-        clientToCreate.setPassword(bCryptPasswordEncoder.encode(userCreateRequest.getClientCreateRequest().getPassword()));
+        clientToCreate.setPassword(bCryptPasswordEncoder.encode(managerCreateRequest.getClientCreateRequest().getPassword()));
 
-        userToCreate.setAddress(addressToCreate);
-        userToCreate.setClient(clientToCreate);
+        managerToCreate.setAddress(addressToCreate);
+        managerToCreate.setClient(clientToCreate);
 
-        userRepository.save(userToCreate);
+        managerRepository.save(managerToCreate);
     }
 }

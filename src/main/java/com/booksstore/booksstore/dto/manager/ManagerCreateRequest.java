@@ -2,6 +2,11 @@ package com.booksstore.booksstore.dto.manager;
 
 import com.booksstore.booksstore.dto.address.AddressRequest;
 import com.booksstore.booksstore.dto.client.ClientCreateRequest;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,6 +17,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ManagerCreateRequest {
     @CPF
     private String cpf;
