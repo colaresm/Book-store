@@ -9,6 +9,8 @@ import com.booksstore.booksstore.model.Administrator;
 import com.booksstore.booksstore.model.Client;
 import com.booksstore.booksstore.repository.AdministratorRepository;
 import com.booksstore.booksstore.service.AdministratorService;
+import com.booksstore.booksstore.validation.AdministratorValidation;
+
 import java.security.SecureRandom;
 
 import javax.transaction.Transactional;
@@ -18,16 +20,18 @@ import javax.transaction.Transactional;
 public class AdministratorServiceImpl implements AdministratorService{
    
     private final AdministratorRepository administratorRepository;
+    
+    private final AdministratorValidation administratorValidation;
     @Autowired
-    public AdministratorServiceImpl(AdministratorRepository administratorRepository) {
+    public AdministratorServiceImpl(AdministratorRepository administratorRepository,AdministratorValidation administratorValidation) {
      
         this.administratorRepository = administratorRepository;
-      
+        this.administratorValidation=administratorValidation;
     }
     @Override
     public void create(AdministratorCreateRequest administratorCreateRequest) {
 
-        //userValidation.validateForCreation(administratorCreateRequest);
+        administratorValidation.validateForCreation(administratorCreateRequest);
 
         Administrator administratorToCreate = new Administrator();
         Client clientToCreate = new Client();
