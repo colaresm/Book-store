@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.booksstore.booksstore.model.User;
 import com.booksstore.booksstore.dto.user.UserCreateRequest;
 import com.booksstore.booksstore.repository.UserRepository;
-import com.booksstore.booksstore.mapper.UserMapper;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
@@ -22,19 +21,16 @@ import java.security.SecureRandom;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-    private final UserMapper userMapper;
+  
     private final UserRepository userRepository;
 
     private final UserValidation userValidation;
 
 
     @Autowired
-    public UserServiceImpl(UserMapper userMapper, UserRepository userRepository, UserValidation userValidation) {
-        this.userMapper = userMapper;
+    public UserServiceImpl( UserRepository userRepository, UserValidation userValidation) {
         this.userRepository = userRepository;
         this.userValidation= userValidation;
-
-
     }
 
     @Override
