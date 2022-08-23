@@ -25,10 +25,13 @@ public class InitialAuthenticationConfig {
             Administrator administrator= new Administrator();
             Client client = new Client();
             client.setUsername("colaresm2018@gmail.com");
+            
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
+
             client.setPassword(bCryptPasswordEncoder.encode("993818"));
             administrator.setName("Marcelo Colares");
             administrator.setClient(client);
+
             administratorRepository.save(administrator);
 
         }
