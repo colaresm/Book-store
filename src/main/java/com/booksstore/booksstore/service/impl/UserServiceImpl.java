@@ -11,6 +11,7 @@ import com.booksstore.booksstore.validation.UserValidation;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.booksstore.booksstore.model.User;
+import com.booksstore.booksstore.model.enums.Position;
 import com.booksstore.booksstore.dto.user.UserCreateRequest;
 import com.booksstore.booksstore.repository.UserRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,10 +60,13 @@ public class UserServiceImpl implements UserService {
 
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
         clientToCreate.setPassword(bCryptPasswordEncoder.encode(userCreateRequest.getClientCreateRequest().getPassword()));
+        clientToCreate.setPosition(Position.USER);
 
         userToCreate.setAddress(addressToCreate);
         userToCreate.setClient(clientToCreate);
+    
 
+        
         userRepository.save(userToCreate);
     }
 

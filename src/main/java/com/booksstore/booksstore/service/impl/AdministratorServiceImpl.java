@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.booksstore.booksstore.dto.administrator.AdministratorCreateRequest;
 import com.booksstore.booksstore.model.Administrator;
 import com.booksstore.booksstore.model.Client;
+import com.booksstore.booksstore.model.enums.Position;
 import com.booksstore.booksstore.repository.AdministratorRepository;
 import com.booksstore.booksstore.service.AdministratorService;
 import com.booksstore.booksstore.validation.AdministratorValidation;
@@ -39,10 +40,10 @@ public class AdministratorServiceImpl implements AdministratorService{
         administratorToCreate.setName(administratorCreateRequest.getName());
       
         clientToCreate.setUsername(administratorCreateRequest.getClientCreateRequest().getUsername());
-
+        clientToCreate.setPosition(Position.ADMINISTRATOR);
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
         clientToCreate.setPassword(bCryptPasswordEncoder.encode(administratorCreateRequest.getClientCreateRequest().getPassword()));
-
+        
        
         administratorToCreate.setClient(clientToCreate);
 

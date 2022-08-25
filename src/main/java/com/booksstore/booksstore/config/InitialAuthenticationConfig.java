@@ -4,6 +4,7 @@ import com.booksstore.booksstore.model.Administrator;
 import com.booksstore.booksstore.repository.AdministratorRepository;
 import com.booksstore.booksstore.service.AdministratorService;
 import com.booksstore.booksstore.model.Client;
+import com.booksstore.booksstore.model.enums.Position;
 
 import javax.annotation.PostConstruct;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,10 +26,11 @@ public class InitialAuthenticationConfig {
             Administrator administrator= new Administrator();
             Client client = new Client();
             client.setUsername("colaresm2018@gmail.com");
-            
+            client.setPosition(Position.ADMINISTRATOR); 
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
 
             client.setPassword(bCryptPasswordEncoder.encode("993818"));
+           
             administrator.setName("Marcelo Colares");
             administrator.setClient(client);
 

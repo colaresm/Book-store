@@ -18,4 +18,6 @@ public class ClientCreateRequest {
     @NotBlank(message = "O campo senha não deve estar em branco")
     @Size(min = 6, max = 40, message = "O tamanho do campo senha deve ser entre {min} e {max}")
     private String password;
+
+
 }
